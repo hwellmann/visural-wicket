@@ -26,7 +26,7 @@ import java.io.Serializable;
  * You can implement your own `IModel` but this is less work and covers
  * 99% of use cases.
  *
- * @version $Id: ComponentModelToLabel.java 109 2010-02-23 01:47:12Z tibes80@gmail.com $
+ * @version $Id: ComponentModelToLabel.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public interface ComponentModelToLabel<T> extends Serializable {

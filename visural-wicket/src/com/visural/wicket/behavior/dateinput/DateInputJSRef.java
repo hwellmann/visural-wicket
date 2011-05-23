@@ -16,13 +16,13 @@
  */
 package com.visural.wicket.behavior.dateinput;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  *
  * @author Richard NIchols
  */
-public class DateInputJSRef extends ResourceReference {
+public class DateInputJSRef extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public DateInputJSRef() {
         super(DateInputJSRef.class, "jquery.date_input.js");

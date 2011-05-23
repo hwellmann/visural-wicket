@@ -34,7 +34,7 @@ import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.PropertyModel;
 
 /**
- * @version $Id: SubmittersPage.java 119 2010-02-23 12:03:28Z tibes80@gmail.com $
+ * @version $Id: SubmittersPage.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 @At(url="/submitters")

@@ -16,13 +16,13 @@
  */
 package com.visural.wicket.examples.fancybox;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  *
  * @author Richard
  */
-public class ImageRef extends ResourceReference {
+public class ImageRef extends PackageResourceReference {
 
     public ImageRef(String name) {
         super(ImageRef.class, name);

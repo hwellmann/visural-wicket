@@ -16,13 +16,13 @@
  */
 package com.visural.wicket.util.supportie;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  * @version $Id$
  * @author Richard Nichols
  */
-public class RoundiesJSRef extends ResourceReference {
+public class RoundiesJSRef extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public RoundiesJSRef() {
         super(RoundiesJSRef.class, "DD_roundies.js");

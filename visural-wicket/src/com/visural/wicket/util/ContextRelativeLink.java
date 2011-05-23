@@ -16,15 +16,13 @@
  */
 package com.visural.wicket.util;
 
-import org.apache.wicket.RequestCycle;
-
 /**
  * Provides a way to generate URL links within the context of the Java webapp.
  * This is to allow easy linking from Wicket to other webapp components, e.g. Servlet.
  * 
  * Adapted from `ExternalLink`.
  *
- * @version $Id: ContextRelativeLink.java 109 2010-02-23 01:47:12Z tibes80@gmail.com $
+ * @version $Id: ContextRelativeLink.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class ContextRelativeLink {
@@ -40,7 +38,9 @@ public class ContextRelativeLink {
         if (relativeURL.length() > 0 && relativeURL.charAt(0) == '/') {
             relativeURL = relativeURL.substring(1);
         }
-        String adjustedURL = RequestCycle.get().getProcessor().getRequestCodingStrategy().rewriteStaticRelativeUrl(relativeURL);
-        return adjustedURL;
+        // TODO:
+        throw new UnsupportedOperationException("Not yet implemented.");
+//        String adjustedURL = RequestCycle.get().getProcessor().getRequestCodingStrategy().rewriteStaticRelativeUrl(relativeURL);
+//        return adjustedURL;
     }
 }

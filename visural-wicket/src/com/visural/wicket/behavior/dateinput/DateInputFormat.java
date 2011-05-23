@@ -23,7 +23,7 @@ package com.visural.wicket.behavior.dateinput;
  * The jquery.date_input.js uses transform functions to apply date formats.
  * For this reason it's not trivial to just use a traditional date format string.
  *
- * @version $Id: DateInputFormat.java 229 2010-11-22 09:02:48Z tibes80@gmail.com $
+ * @version $Id: DateInputFormat.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public enum DateInputFormat {

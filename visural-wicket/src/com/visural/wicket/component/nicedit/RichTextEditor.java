@@ -24,12 +24,10 @@ import com.visural.wicket.security.ISecureRenderInstance;
 import com.visural.wicket.util.RenderAsInlineBlockComponentBorder;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.wicket.behavior.HeaderContributor;
-import org.apache.wicket.markup.html.IHeaderContributor;
 import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
  * Rich Text Editor component (i.e. WYSIWYG HTML editor).
@@ -42,7 +40,7 @@ import org.apache.wicket.model.IModel;
  * This is due to the way that Nicedit attachs it's onSubmit() behavior not
  * being compatible with wicket-based forms.
  *
- * @version $Id: RichTextEditor.java 232 2010-11-22 09:51:32Z tibes80@gmail.com $
+ * @version $Id: RichTextEditor.java 265 2011-03-09 02:17:15Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class RichTextEditor<T> extends TextArea<T> implements ISecureEnableInstance, ISecureRenderInstance {
@@ -59,7 +57,7 @@ public class RichTextEditor<T> extends TextArea<T> implements ISecureEnableInsta
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */
@@ -69,17 +67,20 @@ public class RichTextEditor<T> extends TextArea<T> implements ISecureEnableInsta
 
     private void init() {
         this.setOutputMarkupId(true);
-        setComponentBorder(new RenderAsInlineBlockComponentBorder());
+        add(new RenderAsInlineBlockComponentBorder());
         loadDefaultButtonConfig();
-        if (autoAddToHeader()) {
-            add(JavascriptPackageResource.getHeaderContribution(new NiceditJSRef()));
-        }
-        add(new HeaderContributor(new IHeaderContributor() {
-            public void renderHead(IHeaderResponse resp) {
-                resp.renderOnLoadJavascript(getInitJS());
-            }
-        }));
     }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        if (autoAddToHeader()) {
+            response.renderJavaScriptReference(new NiceditJSRef());
+        }
+        response.renderOnLoadJavaScript(getInitJS());
+    }
+
+
     
     private String getInitJS() {
         return "new nicEditor("+getConfigString()+").panelInstance('"+this.getMarkupId()+"');";
@@ -117,7 +118,7 @@ public class RichTextEditor<T> extends TextArea<T> implements ISecureEnableInsta
 
     private String getConfigString() {
         StringBuilder config = new StringBuilder("{");
-        config.append("iconsPath : '").append(urlFor(new NiceditIconsRef())).append("'");
+        config.append("iconsPath : '").append(urlFor(new NiceditIconsRef(), new PageParameters())).append("'");
         
         config.append(",");
 

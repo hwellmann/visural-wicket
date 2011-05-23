@@ -17,13 +17,13 @@
 
 package com.visural.wicket.behavior.beautytips;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  *
  * @author Richard
  */
-public class BeautyTipsJSRef extends ResourceReference {
+public class BeautyTipsJSRef extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public BeautyTipsJSRef() {
         super(BeautyTipsJSRef.class, "jquery.bt.js");

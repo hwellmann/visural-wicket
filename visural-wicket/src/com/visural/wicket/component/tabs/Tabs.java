@@ -24,13 +24,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import org.apache.wicket.ResourceReference;
-import org.apache.wicket.behavior.AbstractBehavior;
-import org.apache.wicket.behavior.HeaderContributor;
+import org.apache.wicket.Component;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.behavior.SimpleAttributeModifier;
-import org.apache.wicket.markup.html.CSSPackageResource;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.request.resource.ResourceReference;
 
 /**
  *
@@ -45,16 +44,12 @@ public class Tabs extends WebMarkupContainer implements ISecureEnableInstance, I
     public Tabs(String id) {
         super(id);
         setOutputMarkupId(true);
-        ResourceReference cssResource = getCSS();
-        if (cssResource != null && autoAddToHeader()) {
-            add(new HeaderContributor(CSSPackageResource.getHeaderContribution(cssResource)));
-        }
         add(new SimpleAttributeModifier("class", "tab_contents"));
-        add(new AbstractBehavior() {
+        add(new Behavior() {
 
             @Override
-            public void renderHead(IHeaderResponse response) {
-                response.renderOnDomReadyJavascript("if (jQuery('#"+Tabs.this.getMarkupId()+"_tabs').length == 0) { " +
+            public void renderHead(Component component, IHeaderResponse response) {
+                response.renderOnDomReadyJavaScript("if (jQuery('#"+Tabs.this.getMarkupId()+"_tabs').length == 0) { " +
                         "var tempTabs = jQuery('#"+Tabs.this.getMarkupId()+"').clone();" +
                         "jQuery('"+tabsContainer().replace("'", "\\'")+"').insertAfter(jQuery('#"+Tabs.this.getMarkupId()+"'));" +
                         "jQuery('#"+Tabs.this.getMarkupId()+"').remove();" +
@@ -84,9 +79,9 @@ public class Tabs extends WebMarkupContainer implements ISecureEnableInstance, I
                             .append(t.getMarkupId())
                             .append("_link\" class=\"")
                             .append(clazz)
-                            .append("\" href=\"#\" onclick=\"")
+                            .append("\" href=\"javascript:void(0);\" onclick=\"")
                             .append(StringUtil.htmlAttributeEscape(getSelectTabString(t.getMarkupId()).toString()))
-                            .append(" return false;\">")
+                            .append("\">")
                             .append(StringUtil.htmlEscape(t.getLabel()))
                             .append("</a>");
                     }
@@ -97,8 +92,18 @@ public class Tabs extends WebMarkupContainer implements ISecureEnableInstance, I
         });
     }
 
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        ResourceReference cssResource = getCSS();
+        if (cssResource != null && autoAddToHeader()) {
+            response.renderCSSReference(cssResource);
+        }
+    }
+
+
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */

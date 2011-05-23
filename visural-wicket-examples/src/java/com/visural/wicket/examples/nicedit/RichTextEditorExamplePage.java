@@ -28,7 +28,7 @@ import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.Model;
 
 /**
- * @version $Id: RichTextEditorExamplePage.java 94 2010-02-20 09:21:18Z tibes80@gmail.com $
+ * @version $Id: RichTextEditorExamplePage.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 @At(url="/rich-text-editor")

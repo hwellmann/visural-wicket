@@ -21,7 +21,7 @@ import java.net.URL;
 /**
  * A factory for creating simple {@link ImageReference} implementations.
  * 
- * @version $Id: ImageReferenceFactory.java 119 2010-02-23 12:03:28Z tibes80@gmail.com $
+ * @version $Id: ImageReferenceFactory.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class ImageReferenceFactory {

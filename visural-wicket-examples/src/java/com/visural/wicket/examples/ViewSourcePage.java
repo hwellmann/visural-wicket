@@ -19,8 +19,8 @@ package com.visural.wicket.examples;
 import com.visural.common.IOUtil;
 import com.visural.wicket.component.codebox.CodeBox;
 import java.io.IOException;
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
  *
@@ -33,7 +33,7 @@ public class ViewSourcePage extends WebPage {
     public ViewSourcePage(PageParameters param) {
         super(param);
         try {
-            String resource = param.getString(PARAM_RESOURCE);
+            String resource = param.get(PARAM_RESOURCE).toString();
             String source = IOUtil.urlToString(this.getClass().getResource(resource));
             add(new CodeBox("codebox", source));
         } catch (IOException ex) {

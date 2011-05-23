@@ -18,16 +18,16 @@
 package com.visural.wicket.component.nicedit;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
 
 /**
  * Ensures that the display {@link RichTextEditor} content are synchronised with the hidden form DOM components.
  *
- * @version $Id: RichTextEditorFormBehavior.java 255 2011-01-11 02:45:27Z tibes80@gmail.com $
+ * @version $Id: RichTextEditorFormBehavior.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class RichTextEditorFormBehavior extends AbstractBehavior {
+public class RichTextEditorFormBehavior extends Behavior {
     private static final long serialVersionUID = 1L;
     
     @Override

@@ -23,7 +23,7 @@ import java.io.Serializable;
  *
  * Returning null for any method indicates property is unknown.
  *
- * @version $Id: ImageReference.java 119 2010-02-23 12:03:28Z tibes80@gmail.com $
+ * @version $Id: ImageReference.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public interface ImageReference extends Serializable {

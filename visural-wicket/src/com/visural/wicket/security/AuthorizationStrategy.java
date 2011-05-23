@@ -22,6 +22,7 @@ import java.util.Map;
 import org.apache.wicket.Component;
 import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
+import org.apache.wicket.request.component.IRequestableComponent;
 
 /**
  * Authorization strategy that enables components implementing {@link ISecureEnableInstance}
@@ -29,7 +30,7 @@ import org.apache.wicket.authorization.IAuthorizationStrategy;
  *
  * Customize your Wicket `Application` class to use this authorization strategy.
  *
- * @version $Id: AuthorizationStrategy.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: AuthorizationStrategy.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class AuthorizationStrategy implements IAuthorizationStrategy {
@@ -49,7 +50,7 @@ public class AuthorizationStrategy implements IAuthorizationStrategy {
         this.clientProvider = clientProvider;
     }
 
-    public <T extends Component> boolean isInstantiationAuthorized(Class<T> type) {
+    public <T extends IRequestableComponent> boolean isInstantiationAuthorized(Class<T> type) {
         if (createPrivilege.get(type) != null) {
             return createPrivilege.get(type).isGrantedToClient(clientProvider.getCurrentClient());
         }
@@ -74,4 +75,5 @@ public class AuthorizationStrategy implements IAuthorizationStrategy {
         }
         return true;
     }
+
 }

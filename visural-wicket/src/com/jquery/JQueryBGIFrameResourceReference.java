@@ -16,13 +16,13 @@
  */
 package com.jquery;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
- * @version $Id: JQueryBGIFrameResourceReference.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: JQueryBGIFrameResourceReference.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class JQueryBGIFrameResourceReference extends ResourceReference {
+public class JQueryBGIFrameResourceReference extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public JQueryBGIFrameResourceReference() {
         super(JQueryBGIFrameResourceReference.class, "jquery.bgiframe.js");

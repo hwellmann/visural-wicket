@@ -19,9 +19,10 @@ package com.visural.wicket.behavior.jsr303;
 import java.io.Serializable;
 import java.util.List;
 import org.apache.wicket.Component;
-import org.apache.wicket.Component.IVisitor;
-import org.apache.wicket.behavior.IBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.html.form.FormComponent;
+import org.apache.wicket.util.visit.IVisit;
+import org.apache.wicket.util.visit.IVisitor;
 
 /**
  * Adds JSR303 property model behavior to a form's components.
@@ -29,17 +30,17 @@ import org.apache.wicket.markup.html.form.FormComponent;
  * @version $Id$
  * @author Richard Nichols
  */
-public class JSR303FormVisitor implements IVisitor, Serializable {
+public class JSR303FormVisitor implements IVisitor<Component, Void>, Serializable {
+
     private static final long serialVersionUID = 1L;
-    
-    public Object component(Component com) {
+
+    public void component(Component com, IVisit<Void> ivisit) {
         if (FormComponent.class.isAssignableFrom(com.getClass())) {
             FormComponent fc = (FormComponent) com;
             if (noJSR303Behavior(fc)) {
                 fc.add(newJSR303AnnotatedPropertyModelBehavior());
             }
         }
-        return IVisitor.CONTINUE_TRAVERSAL;
     }
 
     protected JSR303AnnotatedPropertyModelBehavior newJSR303AnnotatedPropertyModelBehavior() {
@@ -47,8 +48,8 @@ public class JSR303FormVisitor implements IVisitor, Serializable {
     }
 
     private boolean noJSR303Behavior(FormComponent fc) {
-        List<IBehavior> bhvs = fc.getBehaviors();
-        for (IBehavior b : bhvs) {
+        List<? extends Behavior> bhvs = fc.getBehaviors();
+        for (Behavior b : bhvs) {
             if (JSR303AnnotatedPropertyModelBehavior.class.isAssignableFrom(b.getClass())) {
                 return false;
             }

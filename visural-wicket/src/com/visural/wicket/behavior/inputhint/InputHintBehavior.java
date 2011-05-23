@@ -20,11 +20,11 @@ import com.visural.common.StringUtil;
 import java.util.HashSet;
 import java.util.Set;
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
-import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  * Provides "hint text" inside `<input ...>` components similar to HTML5's
@@ -33,7 +33,7 @@ import org.apache.wicket.markup.html.form.Form;
  * @version $Id$
  * @author Richard Nichols
  */
-public class InputHintBehavior extends AbstractBehavior {
+public class InputHintBehavior extends Behavior {
 
     private static final long serialVersionUID = 1L;
 
@@ -58,7 +58,7 @@ public class InputHintBehavior extends AbstractBehavior {
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */
@@ -67,12 +67,12 @@ public class InputHintBehavior extends AbstractBehavior {
     }
 
     @Override
-    public void renderHead(IHeaderResponse response) {
+    public void renderHead(Component component, IHeaderResponse response) {
         if (autoAddToHeader()) {
-            response.renderJavascriptReference(new ResourceReference(InputHintBehavior.class, "visural-inputhint.js"));
+            response.renderJavaScriptReference(new PackageResourceReference(InputHintBehavior.class, "visural-inputhint.js"));
         }
-        response.renderJavascript(getInitJS(), null);
-        response.renderOnDomReadyJavascript(getDomJS());
+        response.renderJavaScript(getInitJS(), null);
+        response.renderOnDomReadyJavaScript(getDomJS());
     }
 
     private String getInitJS() {

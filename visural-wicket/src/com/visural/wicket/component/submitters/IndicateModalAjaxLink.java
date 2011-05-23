@@ -27,7 +27,7 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 /**
  * An AJAX `Link` which displays a modal dialog indicating work-in-progress, while the update occurs. *Requires JQuery*
  *
- * @version $Id: IndicateModalAjaxLink.java 232 2010-11-22 09:51:32Z tibes80@gmail.com $
+ * @version $Id: IndicateModalAjaxLink.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public abstract class IndicateModalAjaxLink extends AjaxLink implements IndicateModalAsyncComponent, ISecureEnableInstance, ISecureRenderInstance {
@@ -42,7 +42,7 @@ public abstract class IndicateModalAjaxLink extends AjaxLink implements Indicate
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */

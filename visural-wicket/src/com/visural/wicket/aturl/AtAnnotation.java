@@ -20,10 +20,7 @@ import com.visural.common.ClassFinder;
 import java.util.Set;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.request.target.coding.HybridUrlCodingStrategy;
-import org.apache.wicket.request.target.coding.IndexedHybridUrlCodingStrategy;
-import org.apache.wicket.request.target.coding.IndexedParamUrlCodingStrategy;
-import org.apache.wicket.request.target.coding.MixedParamUrlCodingStrategy;
+import org.apache.wicket.request.mapper.MountedMapper;
 
 /**
  * Used to mount {@link At} annotated WebPages at given urls, using either the
@@ -42,7 +39,7 @@ import org.apache.wicket.request.target.coding.MixedParamUrlCodingStrategy;
  *         ...
  *     }
  * 
- * @version $Id: AtAnnotation.java 109 2010-02-23 01:47:12Z tibes80@gmail.com $
+ * @version $Id: AtAnnotation.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class AtAnnotation {
@@ -72,21 +69,27 @@ public class AtAnnotation {
         At at = (At) page.getAnnotation(At.class);
         switch (at.type()) {
             case Standard:
-                if (at.urlParameters().length == 0) {
-                    app.mountBookmarkablePage(at.url(), page);
-                } else {
-                    app.mount(new MixedParamUrlCodingStrategy(at.url(), page, at.urlParameters()));
+                StringBuilder url = new StringBuilder(at.url());
+                for (String param : at.urlParameters()) {
+                    url.append("/${").append(param).append("}");
                 }
+                app.mount(new MountedMapper(url.toString(), page));
                 break;
             case Indexed:
-                app.mount(new IndexedParamUrlCodingStrategy(at.url(), page));
-                break;
+                // TODO:
+                throw new UnsupportedOperationException("Not yet supported.");
+                //app.mount(new IndexedParamUrlCodingStrategy(at.url(), page));
+                //break;
             case StateInURL:
-                app.mount(new HybridUrlCodingStrategy(at.url(), page));
-                break;
+                // TODO:
+                throw new UnsupportedOperationException("Not yet supported.");
+                //app.mount(new HybridUrlCodingStrategy(at.url(), page));
+                //break;
             case IndexedStateInURL:
-                app.mount(new IndexedHybridUrlCodingStrategy(at.url(), page));
-                break;
+                // TODO:
+                throw new UnsupportedOperationException("Not yet supported.");
+                //app.mount(new IndexedHybridUrlCodingStrategy(at.url(), page));
+                //break;
         }
 
     }

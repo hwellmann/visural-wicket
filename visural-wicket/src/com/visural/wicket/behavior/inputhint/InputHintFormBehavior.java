@@ -19,7 +19,7 @@ package com.visural.wicket.behavior.inputhint;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.WicketRuntimeException;
-import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.Form;
 
@@ -30,7 +30,7 @@ import org.apache.wicket.markup.html.form.Form;
  * @version $Id: RichTextEditorFormBehavior.java 109 2010-02-23 01:47:12Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class InputHintFormBehavior extends AbstractBehavior {
+public class InputHintFormBehavior extends Behavior {
 
     private static final long serialVersionUID = 1L;
 

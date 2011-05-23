@@ -16,13 +16,13 @@
  */
 package net.fancybox;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
- * @version $Id: FancyBoxJavascriptRef.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: FancyBoxJavascriptRef.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class FancyBoxJavascriptRef extends ResourceReference {
+public class FancyBoxJavascriptRef extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public FancyBoxJavascriptRef() {
         super(FancyBoxJavascriptRef.class, "jquery.fancybox-1.3.1.js");

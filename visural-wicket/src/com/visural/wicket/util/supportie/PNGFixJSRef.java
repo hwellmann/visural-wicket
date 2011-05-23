@@ -16,13 +16,13 @@
  */
 package com.visural.wicket.util.supportie;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  * @version $Id$
  * @author Richard Nichols
  */
-public class PNGFixJSRef extends ResourceReference {
+public class PNGFixJSRef extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public PNGFixJSRef() {
         super(PNGFixJSRef.class, "DD_belatedPNG.js");

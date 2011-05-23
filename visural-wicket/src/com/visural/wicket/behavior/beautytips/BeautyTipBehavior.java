@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.wicket.Component;
-import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.model.IModel;
@@ -40,12 +40,12 @@ import org.apache.wicket.model.IModel;
  * 
  * @author Richard Nichols
  */
-public class BeautyTipBehavior extends AbstractBehavior {
+public class BeautyTipBehavior extends Behavior {
     private static final long serialVersionUID = 1L;
     
     private final String tip;
     private final IModel tipModel;
-    private final Set<String> componentIds = new HashSet<String>();
+    private final Set<Component> componentIds = new HashSet<Component>();
 
     public BeautyTipBehavior(String tip) {
         this.tip = tip;
@@ -58,7 +58,7 @@ public class BeautyTipBehavior extends AbstractBehavior {
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */
@@ -186,23 +186,23 @@ public class BeautyTipBehavior extends AbstractBehavior {
 
     @Override
     public void bind(Component component) {
-        componentIds.add(component.getMarkupId());
+        componentIds.add(component);
         component.setOutputMarkupId(true);
     }
 
     @Override
-    public void renderHead(IHeaderResponse response) {
+    public void renderHead(Component component, IHeaderResponse response) {
         if (autoAddToHeader()) {
             new com.google.excanvas.ExCanvasHeaderContributor().renderHead(response);
-            response.renderJavascriptReference(new BeautyTipsJSRef());
+            response.renderJavaScriptReference(new BeautyTipsJSRef());
         }
-        response.renderOnDomReadyJavascript(getJS());
+        response.renderOnDomReadyJavaScript(getJS());
     }
 
     private String getJS() {
         StringBuilder sb = new StringBuilder();
-        for (String id : componentIds) {
-            sb.append("jQuery('#").append(id).append("').bt(").append(getOptionsJSON()).append(");");
+        for (Component com : componentIds) {
+            sb.append("jQuery('#").append(com.getMarkupId()).append("').bt(").append(getOptionsJSON()).append(");");
         }
         return sb.toString();
     }

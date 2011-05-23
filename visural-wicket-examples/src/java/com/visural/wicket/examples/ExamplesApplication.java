@@ -16,14 +16,9 @@
  */
 package com.visural.wicket.examples;
 
-import com.jquery.JQueryResourceReference;
-import com.jquery.JQueryResourceReference.Version;
 import com.visural.wicket.aturl.AtAnnotation;
 import com.visural.wicket.util.lesscss.LessCSSResourceStreamLocator;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
-import org.apache.wicket.protocol.http.HttpSessionStore;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.session.ISessionStore;
 
 /** 
  *
@@ -33,7 +28,6 @@ import org.apache.wicket.session.ISessionStore;
 public class ExamplesApplication extends WebApplication {
 
     public ExamplesApplication() {
-        addRenderHeadListener(JavascriptPackageResource.getHeaderContribution(new JQueryResourceReference(Version.V1_4_2)));
     }
 
     @Override
@@ -47,11 +41,11 @@ public class ExamplesApplication extends WebApplication {
         getResourceSettings().setResourcePollFrequency(null);
         getResourceSettings().setResourceStreamLocator(new LessCSSResourceStreamLocator(getResourceFinder()));
     }
-
-    @Override
-    protected ISessionStore newSessionStore() {
-        return new HttpSessionStore(this);
-    }
+//
+//    @Override
+//    protected ISessionStore newSessionStore() {
+//        return new HttpSessionStore(this);
+//    }
 
     public Class getHomePage() {
         return ExampleIndexPage.class;

@@ -23,13 +23,9 @@ import com.visural.wicket.security.IPrivilege;
 import com.visural.wicket.security.ISecureEnableInstance;
 import com.visural.wicket.security.ISecureRenderInstance;
 import java.io.Serializable;
-import org.apache.wicket.behavior.HeaderContributor;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.MarkupStream;
-import org.apache.wicket.markup.html.CSSPackageResource;
-import org.apache.wicket.markup.html.IHeaderContributor;
 import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.WebComponent;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -46,7 +42,7 @@ import org.apache.wicket.model.Model;
  *
  * Apply to a `<pre>` or `<code>` block.
  *
- * @version $Id: CodeBox.java 232 2010-11-22 09:51:32Z tibes80@gmail.com $
+ * @version $Id: CodeBox.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class CodeBox extends WebComponent implements Serializable, ISecureEnableInstance, ISecureRenderInstance {
@@ -61,7 +57,6 @@ public class CodeBox extends WebComponent implements Serializable, ISecureEnable
      */
     public CodeBox(String id) {
         super(id);
-        includeHeaderContributions();
     }
 
     /**
@@ -80,11 +75,10 @@ public class CodeBox extends WebComponent implements Serializable, ISecureEnable
      */
     public CodeBox(final String id, IModel model) {
         super(id, model);
-        includeHeaderContributions();
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */
@@ -92,19 +86,16 @@ public class CodeBox extends WebComponent implements Serializable, ISecureEnable
         return true;
     }
 
-    private void includeHeaderContributions() {
+    @Override
+    public void renderHead(IHeaderResponse response) {
         if (autoAddToHeader()) {
-            add(new HeaderContributor(CSSPackageResource.getHeaderContribution(new PrettifyCSSResourceReference())));
-            add(new HeaderContributor(JavascriptPackageResource.getHeaderContribution(new PrettifyJSResourceReference())));
+            response.renderCSSReference(new PrettifyCSSResourceReference());
+            response.renderJavaScriptReference(new PrettifyJSResourceReference());
         }
-        add(new HeaderContributor(new IHeaderContributor() {
-            public void renderHead(IHeaderResponse response) {
-                if (getLanguageOverride() != null && getLanguageOverride().getExtraJSfile() != null) {
-                    response.renderJavascriptReference(new ExtraJSResourceReference(getLanguageOverride()));
-                }
-                response.renderOnDomReadyJavascript("prettyPrint()");
-            }
-        }));
+        if (getLanguageOverride() != null && getLanguageOverride().getExtraJSfile() != null) {
+            response.renderJavaScriptReference(new ExtraJSResourceReference(getLanguageOverride()));
+        }
+        response.renderOnDomReadyJavaScript("prettyPrint()");
     }
 
     @Override
@@ -124,7 +115,7 @@ public class CodeBox extends WebComponent implements Serializable, ISecureEnable
     }
 
     @Override
-    protected void onComponentTagBody(final MarkupStream markupStream, final ComponentTag openTag) {
+    public void onComponentTagBody(final MarkupStream markupStream, final ComponentTag openTag) {
         String code = this.getDefaultModelObjectAsString();
         if (code != null) {
             if (isDisplayLineNumbers()) {
@@ -137,7 +128,7 @@ public class CodeBox extends WebComponent implements Serializable, ISecureEnable
     }
 
     private String formatLineNumbers(String code) {
-        StringBuffer codeWithLines = new StringBuffer(code.length() * 2);
+        StringBuilder codeWithLines = new StringBuilder(code.length() * 2);
         String[] lines = code.split("\n");
         int numPlaces = Integer.toString(lines.length).length();
         int lineNo = 1;
@@ -183,7 +174,7 @@ public class CodeBox extends WebComponent implements Serializable, ISecureEnable
     }
 
     private String rightJustifyAndPad(int lineNo, int places) {
-        StringBuffer result = new StringBuffer(places);
+        StringBuilder result = new StringBuilder(places);
         result.append(lineNo);
         while (result.length() < places) {
             result.insert(0, ' ');

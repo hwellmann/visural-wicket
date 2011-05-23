@@ -17,7 +17,8 @@
 package com.visural.wicket.util.supportie;
 
 import java.util.Map;
-import org.apache.wicket.markup.html.IHeaderContributor;
+import org.apache.wicket.Component;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.html.IHeaderResponse;
 
 /**
@@ -36,8 +37,8 @@ public class SupportIE {
      * @param cssSelectors
      * @return
      */
-    public static IHeaderContributor getFixPNGContributor(String urlForPNGRef, String[] cssSelectors) {
-        StringBuffer js = new StringBuffer("<!--[if IE 6]><script src=\"");
+    public static Behavior getFixPNGContributor(String urlForPNGRef, String[] cssSelectors) {
+        StringBuilder js = new StringBuilder("<!--[if IE 6]><script src=\"");
         js.append(urlForPNGRef);
         js.append("\"></script><script type=\"text/javascript\">");
         for (String selector : cssSelectors) {
@@ -47,16 +48,17 @@ public class SupportIE {
         }
         js.append("</script><![endif]-->");
         final String hdr = js.toString();
-        return new IHeaderContributor() {
+        return new Behavior() {
 
-            public void renderHead(IHeaderResponse arg0) {
+            @Override
+            public void renderHead(Component component, IHeaderResponse arg0) {
                 arg0.renderString(hdr);
             }
         };
     }
 
     /**
-     * Add's rounded corners under IE using Javascript. Has no effect on other browsers.
+     * Add's rounded corners under IE using JavaScript. Has no effect on other browsers.
      *
      * (Note that depending the rest of your page CSS, YMMV!)
      *
@@ -64,8 +66,8 @@ public class SupportIE {
      * @param selectorAndRounding
      * @return
      */
-    public static IHeaderContributor getRoundiesContributor(String urlForRoundiesRef, Map<String,String> selectorAndRounding) {
-        StringBuffer js = new StringBuffer("<!--[if IE]><script src=\"");
+    public static Behavior getRoundiesContributor(String urlForRoundiesRef, Map<String,String> selectorAndRounding) {
+        StringBuilder js = new StringBuilder("<!--[if IE]><script src=\"");
         js.append(urlForRoundiesRef);
         js.append("\"></script><script type=\"text/javascript\">");
         for (String selector : selectorAndRounding.keySet()) {
@@ -77,9 +79,10 @@ public class SupportIE {
         }
         js.append("</script><![endif]-->");
         final String hdr = js.toString();
-        return new IHeaderContributor() {
+        return new Behavior() {
 
-            public void renderHead(IHeaderResponse arg0) {
+            @Override
+            public void renderHead(Component component, IHeaderResponse arg0) {
                 arg0.renderString(hdr);
             }
         };

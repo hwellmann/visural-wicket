@@ -19,7 +19,7 @@ package com.visural.wicket.aturl;
 /**
  * URL encoding strategies understood by the {@link At} annotation.
  * 
- * @version $Id: URLType.java 79 2010-02-18 06:14:04Z tibes80@gmail.com $
+ * @version $Id: URLType.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public enum URLType {

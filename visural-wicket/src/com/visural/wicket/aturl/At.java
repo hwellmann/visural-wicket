@@ -60,7 +60,7 @@ import java.lang.annotation.Target;
  *
  * Generally though, it is not necessary (and simpler) not to bother with types.
  *
- * @version $Id: At.java 109 2010-02-23 01:47:12Z tibes80@gmail.com $
+ * @version $Id: At.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 @Target({ElementType.TYPE})

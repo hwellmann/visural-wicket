@@ -22,17 +22,17 @@ import com.visural.wicket.security.ISecureEnableInstance;
 import com.visural.wicket.security.ISecureRenderInstance;
 import java.util.Collection;
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.ajax.IAjaxCallDecorator;
+import org.apache.wicket.ajax.calldecorator.AjaxCallDecorator;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.behavior.HeaderContributor;
-import org.apache.wicket.markup.html.IHeaderContributor;
 import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.ResourceReference;
 
 /**
  * An AJAX `Link` which replaces the given elements with an indicator image, while the update occurs. *Requires JQuery*
  *
- * @version $Id: IndicateRefreshAjaxLink.java 232 2010-11-22 09:51:32Z tibes80@gmail.com $
+ * @version $Id: IndicateRefreshAjaxLink.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public abstract class IndicateRefreshAjaxLink extends AjaxLink implements ISecureEnableInstance, ISecureRenderInstance {
@@ -43,15 +43,17 @@ public abstract class IndicateRefreshAjaxLink extends AjaxLink implements ISecur
 
     public IndicateRefreshAjaxLink(String id) {
         super(id);
-        add(new HeaderContributor(new IHeaderContributor() {
-            public void renderHead(IHeaderResponse arg0) {
-                arg0.renderOnDomReadyJavascript("jQuery('<img />').attr('src', '" + urlFor(getRefreshIndicatorImageReference()) + "');");
-            }
-        }));
     }
 
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        response.renderOnDomReadyJavaScript("jQuery('<img />').attr('src', '" + urlFor(getRefreshIndicatorImageReference(), new PageParameters()) + "');");
+    }
+    
+
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */
@@ -86,7 +88,7 @@ public abstract class IndicateRefreshAjaxLink extends AjaxLink implements ISecur
      * @return the html to be replaced for the given container component.
      */
     protected String getIndicatorHTML(Component container) {
-        return "<img src=\""+urlFor(getRefreshIndicatorImageReference())+"\"/>";
+        return "<img src=\""+urlFor(getRefreshIndicatorImageReference(), new PageParameters())+"\"/>";
     }
 
     /**
@@ -100,28 +102,28 @@ public abstract class IndicateRefreshAjaxLink extends AjaxLink implements ISecur
 
     private String getAjaxImageReplaceScript() {
         Collection<? extends Component> containers = getIndicateRefreshContainers();
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         if (containers != null) {
             // TODO: refactor JS - fix namespacing across all components
-            result.append("VISURAL"+this.getMarkupId()+"Complete = false; window.setTimeout(function() { if (!VISURAL"+this.getMarkupId()+"Complete) { ");
+            result.append("VISURAL").append(this.getMarkupId()).append("Complete = false; window.setTimeout(function() { if (!VISURAL").append(this.getMarkupId()).append("Complete) { ");
             for (Component container : containers) {
-                result.append("jQuery('#"+container.getMarkupId()+"').hide();");
-                result.append("jQuery('#"+container.getMarkupId()+"').after('<span class=\"visuralajaxind_"+this.getId()+"\">"+getIndicatorHTML(container)+"</span>');");
+                result.append("jQuery('#").append(container.getMarkupId()).append("').hide();");
+                result.append("jQuery('#").append(container.getMarkupId()).append("').after('<span class=\"visuralajaxind_").append(this.getId()).append("\">").append(getIndicatorHTML(container)).append("</span>');");
             }
-            result.append("} }, "+getIndicatorDisplayThresholdMillis()+");");
+            result.append("} }, ").append(getIndicatorDisplayThresholdMillis()).append(");");
         }
         return result.toString();
     }
 
     private String getAjaxImageUnreplaceScript() {
         Collection<? extends Component> containers = getIndicateRefreshContainers();
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         if (containers != null) {
             // TODO: refactor JS - fix namespacing across all components
-            result.append("VISURAL"+IndicateRefreshAjaxLink.this.getMarkupId()+"Complete = true;");
+            result.append("VISURAL").append(IndicateRefreshAjaxLink.this.getMarkupId()).append("Complete = true;");
             for (Component container : containers) {
-                result.append("jQuery('#"+container.getMarkupId()+"').show();");
-                result.append("jQuery('.visuralajaxind_"+this.getId()+"').remove();");
+                result.append("jQuery('#").append(container.getMarkupId()).append("').show();");
+                result.append("jQuery('.visuralajaxind_").append(this.getId()).append("').remove();");
             }
         }
         return result.toString();
@@ -129,7 +131,7 @@ public abstract class IndicateRefreshAjaxLink extends AjaxLink implements ISecur
 
     @Override
     protected IAjaxCallDecorator getAjaxCallDecorator() {
-        return new IAjaxCallDecorator() {
+        return new AjaxCallDecorator() {
 
             public CharSequence decorateScript(CharSequence script) {
                 return getAjaxImageReplaceScript()+script;

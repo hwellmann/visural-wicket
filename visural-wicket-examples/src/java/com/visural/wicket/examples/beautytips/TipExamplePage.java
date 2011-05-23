@@ -21,7 +21,6 @@ import com.visural.wicket.aturl.At;
 import com.visural.wicket.behavior.beautytips.BeautyTipBehavior;
 import com.visural.wicket.behavior.beautytips.TipPosition;
 import com.visural.wicket.examples.BasePage;
-import org.apache.wicket.behavior.HeaderContributor;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 
 /**

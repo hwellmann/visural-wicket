@@ -24,18 +24,15 @@ import com.visural.wicket.security.ISecureEnableInstance;
 import com.visural.wicket.security.ISecureRenderInstance;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.behavior.AbstractBehavior;
-import org.apache.wicket.behavior.IBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.html.CSSPackageResource;
 import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 
 /**
  * A modal dialog box which appears over other content.
  *
- * The dialog can be opened or closed by straight Javascript or by a
+ * The dialog can be opened or closed by straight JavaScript or by a
  * Wicket AjaxRequestTarget.
  *
  * It can optionally be closed by clicking outside the dialog.
@@ -50,11 +47,11 @@ public class Dialog extends WebMarkupContainer implements ISecureEnableInstance,
     public Dialog(String id) {
         super(id);
         setOutputMarkupId(true);
-        add(new AbstractBehavior() {
+        add(new Behavior() {
 
             @Override
-            public void renderHead(IHeaderResponse response) {
-                response.renderOnDomReadyJavascript(getJS());
+            public void renderHead(Component component, IHeaderResponse response) {
+                response.renderOnDomReadyJavaScript(getJS());
             }
 
             private String getJS() {
@@ -79,17 +76,24 @@ public class Dialog extends WebMarkupContainer implements ISecureEnableInstance,
                 }
             }
         });
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
         if (autoAddToHeader()) {
-            add(JavascriptPackageResource.getHeaderContribution(new JQueryCenterResourceReference()));
-            add(CSSPackageResource.getHeaderContribution(new ModalCSSRef()));
+            response.renderJavaScriptReference(new JQueryCenterResourceReference());
+            response.renderCSSReference(new ModalCSSRef());
             if (isSupportIE6()) {
-                add(JavascriptPackageResource.getHeaderContribution(new JQueryBGIFrameResourceReference()));
+                response.renderJavaScriptReference(new JQueryBGIFrameResourceReference());
             }
         }
     }
 
+
+
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */
@@ -108,7 +112,7 @@ public class Dialog extends WebMarkupContainer implements ISecureEnableInstance,
      * @param target
      */
     public void open(AjaxRequestTarget target) {
-        target.appendJavascript(getOpenString());
+        target.appendJavaScript(getOpenString());
     }
 
     /**
@@ -116,7 +120,7 @@ public class Dialog extends WebMarkupContainer implements ISecureEnableInstance,
      * @param target
      */
     public void close(AjaxRequestTarget target) {
-        target.appendJavascript(getCloseString());
+        target.appendJavaScript(getCloseString());
     }
 
     /**
@@ -124,8 +128,8 @@ public class Dialog extends WebMarkupContainer implements ISecureEnableInstance,
      * event handler that will open this Dialog.
      * @return
      */
-    public IBehavior getClickToOpenBehaviour() {
-        return new AbstractBehavior() {
+    public Behavior getClickToOpenBehaviour() {
+        return new Behavior() {
 
             @Override
             public void onComponentTag(Component component, ComponentTag tag) {
@@ -139,8 +143,8 @@ public class Dialog extends WebMarkupContainer implements ISecureEnableInstance,
      * event handler that will close this Dialog.
      * @return
      */
-    public IBehavior getClickToCloseBehaviour() {
-        return new AbstractBehavior() {
+    public Behavior getClickToCloseBehaviour() {
+        return new Behavior() {
 
             @Override
             public void onComponentTag(Component component, ComponentTag tag) {
@@ -150,7 +154,7 @@ public class Dialog extends WebMarkupContainer implements ISecureEnableInstance,
     }
 
     /**
-     * Returns the Javascript required to open the dialog in the client browser.
+     * Returns the JavaScript required to open the dialog in the client browser.
      * Override to prefix or postfix with your own javascript code.
      * @return
      */
@@ -175,7 +179,7 @@ public class Dialog extends WebMarkupContainer implements ISecureEnableInstance,
     }
 
     /**
-     * Returns the Javascript required to close the dialog in the client browser.
+     * Returns the JavaScript required to close the dialog in the client browser.
      * Override to prefix or postfix with your own javascript code.
      * @return
      */

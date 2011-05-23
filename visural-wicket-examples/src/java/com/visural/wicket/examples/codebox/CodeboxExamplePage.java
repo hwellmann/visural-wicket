@@ -23,7 +23,7 @@ import com.visural.wicket.examples.BasePage;
 import java.io.IOException;
 
 /**
- * @version $Id: CodeboxExamplePage.java 165 2010-06-17 01:17:33Z tibes80@gmail.com $
+ * @version $Id: CodeboxExamplePage.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 @At(url="/code-box")

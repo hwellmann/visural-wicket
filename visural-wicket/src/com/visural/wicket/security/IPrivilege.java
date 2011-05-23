@@ -20,7 +20,7 @@ package com.visural.wicket.security;
 /**
  * A privilege is any condition that can be evaluated with respect to a {@link IClient}.
  * 
- * @version $Id: IPrivilege.java 153 2010-04-09 07:13:53Z tibes80@gmail.com $
+ * @version $Id: IPrivilege.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public interface IPrivilege {

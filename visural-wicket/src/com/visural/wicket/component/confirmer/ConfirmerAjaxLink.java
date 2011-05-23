@@ -27,7 +27,7 @@ import org.apache.wicket.ajax.IAjaxCallDecorator;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 
 /**
- * @version $Id: ConfirmerAjaxLink.java 232 2010-11-22 09:51:32Z tibes80@gmail.com $
+ * @version $Id: ConfirmerAjaxLink.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public abstract class ConfirmerAjaxLink extends AjaxLink implements ConfirmerComponent, ISecureEnableInstance, ISecureRenderInstance {
@@ -41,7 +41,7 @@ public abstract class ConfirmerAjaxLink extends AjaxLink implements ConfirmerCom
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */

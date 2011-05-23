@@ -27,7 +27,7 @@ import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.Form;
 
 /**
- * @version $Id: ConfirmerAjaxSubmitLink.java 232 2010-11-22 09:51:32Z tibes80@gmail.com $
+ * @version $Id: ConfirmerAjaxSubmitLink.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public abstract class ConfirmerAjaxSubmitLink extends AjaxSubmitLink implements ConfirmerComponent, ISecureEnableInstance, ISecureRenderInstance {
@@ -46,7 +46,7 @@ public abstract class ConfirmerAjaxSubmitLink extends AjaxSubmitLink implements 
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */

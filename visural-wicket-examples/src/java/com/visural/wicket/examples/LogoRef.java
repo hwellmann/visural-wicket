@@ -17,13 +17,13 @@
 
 package com.visural.wicket.examples;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  *
  * @author Richard
  */
-public class LogoRef extends ResourceReference {
+public class LogoRef extends PackageResourceReference {
 
     public LogoRef() {
         super(LogoRef.class, "logo_100.png");

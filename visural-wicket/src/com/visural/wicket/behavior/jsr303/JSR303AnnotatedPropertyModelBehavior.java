@@ -23,7 +23,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.apache.wicket.Component;
 import org.apache.wicket.WicketRuntimeException;
-import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.AbstractPropertyModel;
 import org.apache.wicket.validation.IValidator;
@@ -44,7 +44,7 @@ import org.apache.wicket.validation.validator.StringValidator.MinimumLengthValid
  * @version $Id$
  * @author Richard Nichols
  */
-public class JSR303AnnotatedPropertyModelBehavior extends AbstractBehavior {
+public class JSR303AnnotatedPropertyModelBehavior extends Behavior {
 
     private static final long serialVersionUID = 1L;
 

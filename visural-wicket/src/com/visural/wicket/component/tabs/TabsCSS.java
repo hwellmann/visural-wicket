@@ -17,13 +17,13 @@
 
 package com.visural.wicket.component.tabs;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  *
  * @author Visural
  */
-public class TabsCSS extends ResourceReference {
+public class TabsCSS extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public TabsCSS() {
         super(TabsCSS.class, "tabs.css");

@@ -22,7 +22,7 @@ package com.visural.wicket.component.codebox;
  * In general it is not necessary to specify a language, however you can force
  * one by using one of these enumerated types.
  *
- * @version $Id: CodeBoxLanguage.java 146 2010-03-29 10:53:06Z tibes80@gmail.com $
+ * @version $Id: CodeBoxLanguage.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public enum CodeBoxLanguage {

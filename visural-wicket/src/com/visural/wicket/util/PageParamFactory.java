@@ -17,15 +17,13 @@
 package com.visural.wicket.util;
 
 import com.visural.common.Function;
-import java.util.HashMap;
-import java.util.Map;
-import org.apache.wicket.PageParameters;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
  * Easy way to create a mapped PageParameters object, by passing any number
  * of pairs to this factory. 
  * 
- * @version $Id: PageParamFactory.java 109 2010-02-23 01:47:12Z tibes80@gmail.com $
+ * @version $Id: PageParamFactory.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class PageParamFactory {
@@ -39,13 +37,13 @@ public class PageParamFactory {
      * @return
      */
     public static PageParameters get(Object... values) {
-        Map<String, String> params = new HashMap<String, String>();
+        PageParameters params = new PageParameters();
         for (int n = 0; n < values.length - 1; n += 2) {
             if (values[n] == null) {
                 throw new IllegalArgumentException("key value may not be null");
             }
-            params.put(values[n].toString(), Function.nvl(values[n + 1], "").toString());
+            params.add(values[n].toString(), Function.nvl(values[n + 1], "").toString());
         }
-        return new PageParameters(params);
+        return params;
     }
 }

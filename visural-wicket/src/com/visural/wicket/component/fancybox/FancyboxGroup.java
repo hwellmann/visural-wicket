@@ -28,7 +28,7 @@ import java.util.Set;
  *
  * Use the supplied factory `get()` method to generate a new group.
  *
- * @version $Id: FancyboxGroup.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: FancyboxGroup.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class FancyboxGroup implements Serializable {

@@ -23,13 +23,14 @@ import com.visural.wicket.component.submitters.impl.ModalHeaderContributor;
 import java.io.Serializable;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.IAjaxCallDecorator;
-import org.apache.wicket.behavior.HeaderContributor;
-import org.apache.wicket.markup.html.CSSPackageResource;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
+import org.apache.wicket.ajax.calldecorator.AjaxCallDecorator;
+import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.link.AbstractLink;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
- * @version $Id: ConfirmerCommon.java 258 2011-02-24 07:11:45Z tibes80@gmail.com $
+ * @version $Id: ConfirmerCommon.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class ConfirmerCommon implements Serializable {
@@ -53,11 +54,26 @@ public class ConfirmerCommon implements Serializable {
         this.imComponent = com;
         this.component = (Component) imComponent;
         if (com.autoAddToHeader()) {
-            ((Component) com).add(new HeaderContributor(new ModalHeaderContributor()));
-            component.add(JavascriptPackageResource.getHeaderContribution(new JQueryCenterResourceReference()));
-            component.add(CSSPackageResource.getHeaderContribution(new ModalCSSRef()));
+            ((Component) com).add(new ModalHeaderContributor());
+            component.add(new Behavior() {
+                @Override
+                public void renderHead(Component component, IHeaderResponse response) {
+                    response.renderJavaScriptReference(new JQueryCenterResourceReference());
+                }
+            });
+            component.add(new Behavior() {
+                @Override
+                public void renderHead(Component component, IHeaderResponse response) {
+                    response.renderCSSReference(new ModalCSSRef());
+                }
+            });
             if (com.isSupportIE6()) {
-                component.add(JavascriptPackageResource.getHeaderContribution(new JQueryBGIFrameResourceReference()));
+                component.add(new Behavior() {
+                    @Override
+                    public void renderHead(Component component, IHeaderResponse response) {
+                        response.renderJavaScriptReference(new JQueryBGIFrameResourceReference());
+                    }
+                });
             }
         }
     }
@@ -90,7 +106,7 @@ public class ConfirmerCommon implements Serializable {
     public String getContentHTML() {
         StringBuilder html = new StringBuilder("<div "+(modalWidth != null ? "style='width: "+modalWidth+"px;' " : "")+"class=\"modalborder\"><table width=\"100%\"><tr><td width=\"40px\">");
         if (imComponent.getIcon() != null) {
-            html.append("<img src=\"").append(component.urlFor(new ConfirmerIconRef(icon))).append("\" style=\"float: left;\"/>");
+            html.append("<img src=\"").append(component.urlFor(new ConfirmerIconRef(icon), new PageParameters())).append("\" style=\"float: left;\"/>");
         }
         html.append("</td><td>").append(imComponent.getMessageContentHTML()).append("</td></tr></table>");
         html.append("<p style=\"text-align: center;\">");
@@ -115,7 +131,7 @@ public class ConfirmerCommon implements Serializable {
     }
 
     public IAjaxCallDecorator getAjaxCallDecorator() {
-        return new IAjaxCallDecorator() {
+        return new AjaxCallDecorator() {
 
             public CharSequence decorateScript(CharSequence script) {
                 setOnClickJS(""+script);
@@ -133,7 +149,7 @@ public class ConfirmerCommon implements Serializable {
     }
 
     public String getLinkHTML(String buttonLabel, String onClickJS) {
-        return "<a href=\"#\" onclick=\""+onClickJS+";return false;\">"+buttonLabel+"</a>";
+        return "<a href=\"javascript:void(0);\" onclick=\""+onClickJS+"\">"+buttonLabel+"</a>";
     }
 
     public String getCancelButtonLabel() {

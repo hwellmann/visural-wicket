@@ -16,13 +16,13 @@
  */
 package com.visural.javascript;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
- * @version $Id: StringBufferResourceReference.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: StringBufferResourceReference.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class StringBufferResourceReference extends ResourceReference {
+public class StringBufferResourceReference extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public StringBufferResourceReference() {
         super(StringBufferResourceReference.class, "stringbuffer.js");

@@ -22,7 +22,7 @@ import java.io.Serializable;
 /**
  * A client is any user of your system, i.e. in most cases an authenticated User.
  *
- * @version $Id: IClient.java 153 2010-04-09 07:13:53Z tibes80@gmail.com $
+ * @version $Id: IClient.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public interface IClient<T extends Serializable> {

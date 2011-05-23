@@ -27,12 +27,8 @@ import java.util.Map;
 import net.fancybox.FancyBoxCSSRef;
 import net.fancybox.FancyBoxJavascriptRef;
 import net.fancybox.JQueryMouseWheelJSRef;
-import org.apache.wicket.behavior.HeaderContributor;
 import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.html.CSSPackageResource;
-import org.apache.wicket.markup.html.IHeaderContributor;
 import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
@@ -59,7 +55,7 @@ import org.apache.wicket.model.IModel;
  *   `<div style="display: none;"><div wicket:id="myContentToShow">....</div></div>`
  * This is less optimal but has changed due to Fancybox changes in the latest version.
  *
- * @version $Id: Fancybox.java 239 2010-11-23 00:35:45Z tibes80@gmail.com $
+ * @version $Id: Fancybox.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class Fancybox extends WebMarkupContainer implements ISecureEnableInstance, ISecureRenderInstance {
@@ -132,7 +128,7 @@ public class Fancybox extends WebMarkupContainer implements ISecureEnableInstanc
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */
@@ -180,22 +176,22 @@ public class Fancybox extends WebMarkupContainer implements ISecureEnableInstanc
         if (!this.isImage()) {
             this.setHideOnContentClick(false);
         }
-        if (autoAddToHeader()) {
-            add(JavascriptPackageResource.getHeaderContribution(new FancyBoxJavascriptRef()));
-            if (isMouseWheelEnabled()) {
-                add(JavascriptPackageResource.getHeaderContribution(new JQueryMouseWheelJSRef()));
-            }
-            add(CSSPackageResource.getHeaderContribution(new FancyBoxCSSRef()));
-        }
-        add(new HeaderContributor(new IHeaderContributor() {
+    }
 
-            public void renderHead(IHeaderResponse response) {
-                String js = getFancyBoxJS();
-                if (js != null) {
-                    response.renderOnDomReadyJavascript(js);
-                }
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        if (autoAddToHeader()) {
+            response.renderJavaScriptReference(new FancyBoxJavascriptRef());
+            if (isMouseWheelEnabled()) {
+                response.renderJavaScriptReference(new JQueryMouseWheelJSRef());
             }
-        }));
+            response.renderCSSReference(new FancyBoxCSSRef());
+        }
+        String js = getFancyBoxJS();
+        if (js != null) {
+            response.renderOnDomReadyJavaScript(js);
+        }
     }
 
     private String getFancyBoxJS() {
@@ -238,7 +234,7 @@ public class Fancybox extends WebMarkupContainer implements ISecureEnableInstanc
      * Return whether to enable mouse wheel scroll on fancybox groups.
      *
      * By default mouse wheel functionality is disabled as it increases the
-     * amount of Javascript required and only applies to box groups.
+     * amount of JavaScript required and only applies to box groups.
      *
      * Override and return true to enable.
      *

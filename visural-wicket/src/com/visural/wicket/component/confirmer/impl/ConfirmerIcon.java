@@ -18,7 +18,7 @@
 package com.visural.wicket.component.confirmer.impl;
 
 /**
- * @version $Id: ConfirmerIcon.java 159 2010-05-19 06:46:15Z tibes80@gmail.com $
+ * @version $Id: ConfirmerIcon.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public enum ConfirmerIcon {

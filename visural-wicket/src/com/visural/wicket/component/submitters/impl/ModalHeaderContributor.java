@@ -14,20 +14,22 @@
  *  limitations under the License.
  *  under the License.
  */
-
 package com.visural.wicket.component.submitters.impl;
 
-import org.apache.wicket.markup.html.IHeaderContributor;
+import org.apache.wicket.Component;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.html.IHeaderResponse;
 
 /**
- * @version $Id: ModalHeaderContributor.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: ModalHeaderContributor.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class ModalHeaderContributor implements IHeaderContributor {
-    private static final long serialVersionUID = 1L;
-    public void renderHead(IHeaderResponse arg0) {
-        arg0.renderOnDomReadyJavascript("jQuery(document.body).append('<div id=\"visuraloverlay_high\"></div><div id=\"visuraloverlaycontent_high\"></div>');");
-    }
+public class ModalHeaderContributor extends Behavior {
 
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public void renderHead(Component component, IHeaderResponse response) {
+        response.renderOnDomReadyJavaScript("jQuery(document.body).append('<div id=\"visuraloverlay_high\"></div><div id=\"visuraloverlaycontent_high\"></div>');");
+    }
 }

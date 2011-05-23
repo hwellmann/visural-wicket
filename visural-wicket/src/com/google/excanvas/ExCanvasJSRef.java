@@ -17,13 +17,13 @@
 
 package com.google.excanvas;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  *
  * @author Richard
  */
-public class ExCanvasJSRef extends ResourceReference {
+public class ExCanvasJSRef extends PackageResourceReference {
 
     private static final long serialVersionUID = 1L;
 

@@ -16,13 +16,13 @@
  */
 package net.fancybox;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
- * @version $Id: JQueryMouseWheelJSRef.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: JQueryMouseWheelJSRef.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class JQueryMouseWheelJSRef extends ResourceReference {
+public class JQueryMouseWheelJSRef extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public JQueryMouseWheelJSRef() {
         super(JQueryMouseWheelJSRef.class, "jquery.mousewheel-3.0.2.pack.js");

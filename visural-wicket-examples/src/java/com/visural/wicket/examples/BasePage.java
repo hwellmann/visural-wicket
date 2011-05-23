@@ -16,6 +16,8 @@
  */
 package com.visural.wicket.examples;
 
+import com.jquery.JQueryResourceReference;
+import com.jquery.JQueryResourceReference.Version;
 import com.visural.common.StringUtil;
 import com.visural.wicket.component.fancybox.Fancybox;
 import com.visural.wicket.examples.beautytips.TipExamplePage;
@@ -32,17 +34,18 @@ import com.visural.wicket.examples.nicedit.RichTextEditorExamplePage;
 import com.visural.wicket.examples.submitters.SubmittersPage;
 import com.visural.wicket.examples.tabs.TabsExamplePage;
 import com.visural.wicket.examples.vieworedit.ViewOrEditPage;
-import com.visural.wicket.util.ContextRelativeLink;
 import com.visural.wicket.util.PageParamFactory;
 import java.io.File;
+import org.apache.wicket.behavior.SimpleAttributeModifier;
+import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.ExternalLink;
-import org.apache.wicket.markup.html.resources.StyleSheetReference;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /** 
  *
@@ -54,9 +57,7 @@ public abstract class BasePage extends WebPage {
     public static final boolean IS_PROD_MODE = new File("/tmp").exists(); // generally run on a linux host for net deploy
 
     public BasePage() {
-//        add(new StyleSheetReference("reset", BasePage.class, "reset-fonts-grids.css"));
-//        add(new StyleSheetReference("stylesheet", BasePage.class, "style.less"));
-        add(new StyleSheetReference("stylesheet", BasePage.class, "style.css"));
+        add(new WebMarkupContainer("jquery").add(new SimpleAttributeModifier("src", urlFor(new JQueryResourceReference(Version.V1_4_2), new PageParameters()))));
         add(new Label("pageTitle", new PageTitleModel(false)));
         add(new Label("pageTitleHeader", new PageTitleModel(true)).setEscapeModelStrings(false));
         add(new BookmarkablePageLink("tabsLink", TabsExamplePage.class));
@@ -87,6 +88,12 @@ public abstract class BasePage extends WebPage {
                 return getPageTitle();
             }
         }));
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        response.renderCSSReference(new PackageResourceReference(BasePage.class, "style.css"));
     }
 
     private String getSourcePath() {
@@ -123,7 +130,7 @@ public abstract class BasePage extends WebPage {
 
         public Object getObject() {
             if (displayImage) {
-                return "<a href=\"http://code.google.com/p/visural-wicket/\"><img src=\""+urlFor(new LogoRef())+"\"/></a> "+getTitle();
+                return "<a href=\"http://code.google.com/p/visural-wicket/\"><img src=\""+urlFor(new LogoRef(), new PageParameters())+"\"/></a> "+getTitle();
             } else {
                 return getTitle();
             }

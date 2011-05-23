@@ -21,17 +21,16 @@ import com.visural.javascript.JQueryCenterResourceReference;
 import com.visural.wicket.util.PageParamFactory;
 import java.io.Serializable;
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.ajax.IAjaxCallDecorator;
-import org.apache.wicket.behavior.HeaderContributor;
-import org.apache.wicket.markup.html.CSSPackageResource;
-import org.apache.wicket.markup.html.IHeaderContributor;
+import org.apache.wicket.ajax.calldecorator.AjaxCallDecorator;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.link.AbstractLink;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.ResourceReference;
 
 /**
- * @version $Id: IndicateModalCommon.java 232 2010-11-22 09:51:32Z tibes80@gmail.com $
+ * @version $Id: IndicateModalCommon.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class IndicateModalCommon implements Serializable {
@@ -44,19 +43,35 @@ public class IndicateModalCommon implements Serializable {
         this.imComponent = com;
         this.component = (Component) imComponent;
         if (com.autoAddToHeader()) {
-            ((Component) com).add(new HeaderContributor(new ModalHeaderContributor()));
-            component.add(JavascriptPackageResource.getHeaderContribution(new JQueryCenterResourceReference()));
-            component.add(CSSPackageResource.getHeaderContribution(new ModalCSSRef()));
+            ((Component) com).add(new ModalHeaderContributor());
+            component.add(new Behavior() {
+                @Override
+                public void renderHead(Component component, IHeaderResponse response) {
+                    response.renderJavaScriptReference(new JQueryCenterResourceReference());
+                }
+            });
+            component.add(new Behavior() {
+                @Override
+                public void renderHead(Component component, IHeaderResponse response) {
+                    response.renderCSSReference(new ModalCSSRef());
+                }
+            });
             if (com.isSupportIE6()) {
-                component.add(JavascriptPackageResource.getHeaderContribution(new JQueryBGIFrameResourceReference()));
+                component.add(new Behavior() {
+                    @Override
+                    public void renderHead(Component component, IHeaderResponse response) {
+                        response.renderJavaScriptReference(new JQueryBGIFrameResourceReference());
+                    }
+                });
             }
         }
         // preload image
-        ((Component) com).add(new HeaderContributor(new IHeaderContributor() {
-            public void renderHead(IHeaderResponse arg0) {
-                arg0.renderOnDomReadyJavascript("jQuery('<img />').attr('src', '" + component.urlFor(getIndicatorImage()) + "');");
+        ((Component) com).add(new Behavior() {
+            @Override
+            public void renderHead(Component component, IHeaderResponse arg0) {
+                arg0.renderOnDomReadyJavaScript("jQuery('<img />').attr('src', '" + component.urlFor(getIndicatorImage(), new PageParameters()) + "');");
             }
-        }));
+        });
     }
 
     private ResourceReference getIndicatorImage() {
@@ -64,7 +79,7 @@ public class IndicateModalCommon implements Serializable {
     }
 
     public String getDefaultIndicatorHTML() {
-        return "<div class=\"modalborder\"><br/><img src=\"" + component.urlFor(getIndicatorImage()) + "\"/><br/><br/>Please wait...<br/><br/></div>";
+        return "<div class=\"modalborder\"><br/><img src=\"" + component.urlFor(getIndicatorImage(), new PageParameters()) + "\"/><br/><br/>Please wait...<br/><br/></div>";
     }
 
     public String getDefaultTimeoutHTML() {
@@ -104,7 +119,7 @@ public class IndicateModalCommon implements Serializable {
     }
 
     public IAjaxCallDecorator getAjaxCallDecorator() {
-        return new IAjaxCallDecorator() {
+        return new AjaxCallDecorator() {
 
             public CharSequence decorateScript(CharSequence script) {
                 return getModalDisplayScript() + script;

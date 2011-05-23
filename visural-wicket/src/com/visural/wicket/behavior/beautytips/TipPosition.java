@@ -18,7 +18,7 @@
 package com.visural.wicket.behavior.beautytips;
 
 /**
- * @version $Id: TipPosition.java 138 2010-03-26 03:19:56Z tibes80@gmail.com $
+ * @version $Id: TipPosition.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public enum TipPosition {

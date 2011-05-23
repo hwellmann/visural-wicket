@@ -23,7 +23,7 @@ package com.visural.wicket.security;
  * Generally this would be implemented by an IoC glue class, or a thread local var
  * or session-store.
  *
- * @version $Id: IClientProvider.java 153 2010-04-09 07:13:53Z tibes80@gmail.com $
+ * @version $Id: IClientProvider.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public interface IClientProvider<T extends IClient> {

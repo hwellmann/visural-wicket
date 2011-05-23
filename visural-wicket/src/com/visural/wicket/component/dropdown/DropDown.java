@@ -27,16 +27,14 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
-import org.apache.wicket.behavior.AbstractBehavior;
-import org.apache.wicket.behavior.HeaderContributor;
+import org.apache.wicket.request.resource.PackageResourceReference;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.html.CSSPackageResource;
-import org.apache.wicket.markup.html.IHeaderContributor;
 import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.convert.ConversionException;
 import org.apache.wicket.util.convert.IConverter;
 
@@ -67,15 +65,15 @@ import org.apache.wicket.util.convert.IConverter;
  *   * onComponentTag() is final as it will have inconsistent results if used in
  *     the usual way. Try overriding `getValueAttributes()` instead.
  *
- * @version $Id: DropDown.java 258 2011-02-24 07:11:45Z tibes80@gmail.com $
+ * @version $Id: DropDown.java 266 2011-03-09 03:16:28Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class DropDown<T> extends TextField<T> implements Serializable, ISecureEnableInstance, ISecureRenderInstance {
     private static final long serialVersionUID = 1L;
     
-    private final String origMarkupId;
     private final DropDownDataSource source;
     private final boolean requireListValue;
+    private String origMarkupId;
     private boolean enableFiltering = true;
     private boolean enableFilterToggle = true;
     private boolean showArrowIcon = true;
@@ -89,8 +87,11 @@ public class DropDown<T> extends TextField<T> implements Serializable, ISecureEn
         super(id, model);
         this.source = source;
         this.requireListValue = requireListValue;
-        this.setComponentBorder(new DropDownBorder());
-        
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
         origMarkupId = this.getMarkupId();
         this.setOutputMarkupId(true);
         if (requireListValue) {
@@ -99,12 +100,18 @@ public class DropDown<T> extends TextField<T> implements Serializable, ISecureEn
             this.setMarkupId("visural_dropdown_value_"+origMarkupId);
         }
 
-        add(new AbstractBehavior() {
+        add(new Behavior() {
+
             @Override
-            public void onRendered(Component component) {
+            public void beforeRender(Component component) {
+                component.getResponse().write("<span class=\"visural_dropdown_border\">");
+            }
+
+            @Override
+            public void afterRender(Component component) {
                 if (DropDown.this.requireListValue) {
                     String value = "";
-                    if (DropDown.this.hasRawInput()) {
+                    if (StringUtil.isNotBlankStr(DropDown.this.getRawInput())) {
                         String lookup = DropDown.this.getRawInput();
                         T unsubmittedObject = convertValue(new String[]{lookup});
                         if (unsubmittedObject != null) {
@@ -118,38 +125,39 @@ public class DropDown<T> extends TextField<T> implements Serializable, ISecureEn
                     component.getResponse().write("<input type='hidden' id='visural_dropdown_id_"+origMarkupId+"'/>");
                 }
                 if (DropDown.this.isShowArrowIcon()) {
-                    component.getResponse().write("<a class=\"visural_dropdown_arrow\" href=\"#\" onclick=\"visural_dropdown_toggle('"+origMarkupId+"'); return false;\">" +
-                            "<img class='visural_dropdown' alt='[v]' src='"+urlFor(getDropDownIconReference())+"'/>" +
+                    component.getResponse().write("<a class=\"visural_dropdown_arrow\" href=\"javascript:visural_dropdown_toggle('"+origMarkupId+"')\">" +
+                            "<img class='visural_dropdown' alt='[v]' src='"+urlFor(getDropDownIconReference(), new PageParameters())+"'/>" +
                             "</a>");
                 }
+                component.getResponse().write("</span>");
                 component.getResponse().write("<div id=\"visural_dropdown_"+origMarkupId+"\" class=\"visural_dropdown\" " +
                         "onMouseOver=\"visural_dropdown_mouseover('"+origMarkupId+"')\" " +
                         "onMouseOut=\"visural_dropdown_mouseout('"+origMarkupId+"')\"></div>");
             }
         });
+    }
+
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
         if (autoAddToHeader()) {
-            add(JavascriptPackageResource.getHeaderContribution(DropDown.class, "dropdown.js"));
-            add(JavascriptPackageResource.getHeaderContribution(new StringBufferResourceReference()));
-            add(getCSSHeaderContribution());
+            response.renderJavaScriptReference(new PackageResourceReference(DropDown.class, "dropdown.js"));
+            response.renderJavaScriptReference(new StringBufferResourceReference());
+            response.renderCSSReference(getCSSHeaderContribution());
             if (isSupportIE6()) {
-                add(JavascriptPackageResource.getHeaderContribution(new JQueryBGIFrameResourceReference()));
+                response.renderJavaScriptReference(new JQueryBGIFrameResourceReference());
             }
         }
         final String dsjs = DropDownDataSourceJSRender.getJS(source);
-        add(new  HeaderContributor(new IHeaderContributor() {
-            public void renderHead(IHeaderResponse arg0) {
-                arg0.renderOnDomReadyJavascript(dsjs);
-            }
-        }));
-        add(new HeaderContributor(new IHeaderContributor() {
-            public void renderHead(IHeaderResponse arg0) {
-                arg0.renderOnDomReadyJavascript(getInitJS());
-            }
-        }));
+        response.renderOnDomReadyJavaScript(dsjs);
+        response.renderOnDomReadyJavaScript(getInitJS());
     }
 
+
+
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */
@@ -167,7 +175,7 @@ public class DropDown<T> extends TextField<T> implements Serializable, ISecureEn
     }
 
     @Override
-    public IConverter getConverter(Class<?> type) {
+    public <C> IConverter<C> getConverter(Class<C> type) {
         if (requireListValue && source.getValues().size() > 0 && type.equals(source.getValues().get(0).getClass())) {
             return new IConverter() {
                 public Object convertToObject(String listnum, Locale locale) {
@@ -339,8 +347,8 @@ public class DropDown<T> extends TextField<T> implements Serializable, ISecureEn
      * Override to return a different dropdown.css (apply custom dropdown style).
      * @return
      */
-    protected HeaderContributor getCSSHeaderContribution() {
-        return CSSPackageResource.getHeaderContribution(DropDown.class, "dropdown.css");
+    protected ResourceReference getCSSHeaderContribution() {
+        return new PackageResourceReference(DropDown.class, "dropdown.css");
     }
 
     /**

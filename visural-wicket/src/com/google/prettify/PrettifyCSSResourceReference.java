@@ -17,13 +17,13 @@
 
 package com.google.prettify;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
- * @version $Id: PrettifyCSSResourceReference.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: PrettifyCSSResourceReference.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class PrettifyCSSResourceReference extends ResourceReference {
+public class PrettifyCSSResourceReference extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public PrettifyCSSResourceReference() {
         super(PrettifyCSSResourceReference.class, "prettify.css");

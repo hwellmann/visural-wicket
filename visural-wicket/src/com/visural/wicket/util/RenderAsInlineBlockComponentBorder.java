@@ -17,19 +17,21 @@
 package com.visural.wicket.util;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.IComponentBorder;
+import org.apache.wicket.behavior.Behavior;
 
 /**
  *
  * @author Richard Nichols
  */
-public class RenderAsInlineBlockComponentBorder implements IComponentBorder {
+public class RenderAsInlineBlockComponentBorder extends Behavior {
 
-    public void renderBefore(Component cmpnt) {
+    @Override
+    public void beforeRender(Component cmpnt) {
         cmpnt.getResponse().write("<div style=\"display: inline-block;\">");
     }
 
-    public void renderAfter(Component cmpnt) {
+    @Override
+    public void afterRender(Component cmpnt) {
         cmpnt.getResponse().write("</div>");
     }
 }

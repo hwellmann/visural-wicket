@@ -29,6 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.util.file.IResourceFinder;
+import org.apache.wicket.util.lang.Bytes;
 import org.apache.wicket.util.resource.IResourceStream;
 import org.apache.wicket.util.resource.ResourceStreamNotFoundException;
 import org.apache.wicket.util.resource.locator.ResourceStreamLocator;
@@ -38,7 +39,7 @@ import org.apache.wicket.util.time.Time;
  * A stream locator that automatically runs ".less" files through the LessCSS
  * compilation process.
  * 
- * @version $Id: LessCSSResourceStreamLocator.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: LessCSSResourceStreamLocator.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class LessCSSResourceStreamLocator extends ResourceStreamLocator {
@@ -75,9 +76,10 @@ public class LessCSSResourceStreamLocator extends ResourceStreamLocator {
         }
     }
 
+
     @Override
-    public IResourceStream locate(Class<?> clazz, String path, String style, Locale locale, String extension) {
-        IResourceStream orig = super.locate(clazz, path, style, locale, extension);
+    public IResourceStream locate(Class<?> clazz, String path, String style, String variation, Locale locale, String extension, boolean strict) {
+        IResourceStream orig = super.locate(clazz, path, style, variation, locale, extension, strict);
         if (orig == null) {
             return null;
         }
@@ -126,8 +128,8 @@ public class LessCSSResourceStreamLocator extends ResourceStreamLocator {
             return "text/css";
         }
 
-        public long length() {
-            return cr.getLength();
+        public Bytes length() {
+            return Bytes.bytes(cr.getLength());
         }
 
         public InputStream getInputStream() throws ResourceStreamNotFoundException {
@@ -147,6 +149,22 @@ public class LessCSSResourceStreamLocator extends ResourceStreamLocator {
 
         public Time lastModifiedTime() {
             return regular.lastModifiedTime();
+        }
+
+        public String getStyle() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        public void setStyle(String string) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        public String getVariation() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        public void setVariation(String string) {
+            throw new UnsupportedOperationException("Not supported yet.");
         }
     }
 

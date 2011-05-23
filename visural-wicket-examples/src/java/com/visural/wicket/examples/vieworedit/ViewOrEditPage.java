@@ -37,7 +37,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 
 /**
- * @version $Id: ViewOrEditPage.java 125 2010-02-24 10:00:16Z tibes80@gmail.com $
+ * @version $Id: ViewOrEditPage.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 @At(url="/view-or-edit")

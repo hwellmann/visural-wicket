@@ -20,7 +20,7 @@ package com.visural.wicket.security;
  * A `Component` that implements this interface requires the given {@link IPrivilege} instance
  * to be met by the current {@link IClient} in order to be rendered (visible).
  *
- * @version $Id: ISecureRenderInstance.java 153 2010-04-09 07:13:53Z tibes80@gmail.com $
+ * @version $Id: ISecureRenderInstance.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public interface ISecureRenderInstance {

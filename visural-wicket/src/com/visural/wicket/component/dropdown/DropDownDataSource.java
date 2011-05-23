@@ -29,7 +29,7 @@ import java.util.List;
  * the dropdown is the selected object instance from the list of values in the
  * data source.
  *
- * @version $Id: DropDownDataSource.java 109 2010-02-23 01:47:12Z tibes80@gmail.com $
+ * @version $Id: DropDownDataSource.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public interface DropDownDataSource<T> extends Serializable {

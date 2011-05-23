@@ -23,7 +23,7 @@ import org.apache.wicket.model.LoadableDetachableModel;
  *
  * An implementation of `LoadableDetachableModel` designed to store a java bean in-session, i.e. not detachable.
  *
- * @version $Id: RetainedBeanModel.java 110 2010-02-23 02:26:36Z tibes80@gmail.com $
+ * @version $Id: RetainedBeanModel.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class RetainedBeanModel<T> extends LoadableDetachableModel<T> {

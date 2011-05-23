@@ -27,7 +27,7 @@ import org.apache.wicket.markup.html.link.Link;
 /**
  * A `Link` which displays a modal dialog indicating work-in-progress, while the update occurs. *Requires JQuery*
  *
- * @version $Id: IndicateModalLink.java 232 2010-11-22 09:51:32Z tibes80@gmail.com $
+ * @version $Id: IndicateModalLink.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public abstract class IndicateModalLink extends Link implements IndicateModalComponent, ISecureRenderInstance, ISecureEnableInstance {
@@ -41,7 +41,7 @@ public abstract class IndicateModalLink extends Link implements IndicateModalCom
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */

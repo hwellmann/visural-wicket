@@ -25,7 +25,7 @@ import org.apache.wicket.model.IModel;
 /**
  * A property column extension that allows you to override the format for a Date property.
  *
- * @version $Id: DatePropertyColumn.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: DatePropertyColumn.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class DatePropertyColumn extends PropertyColumn {

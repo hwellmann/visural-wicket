@@ -21,7 +21,7 @@ package com.visural.wicket.component.nicedit;
  * editor user interface. The functionality of each should be fairly obvious.
  * Otherwise consult http://nicedit.com/docs.php.
  * 
- * @version $Id: Button.java 70 2010-02-17 03:42:03Z tibes80@gmail.com $
+ * @version $Id: Button.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public enum Button {

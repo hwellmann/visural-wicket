@@ -18,13 +18,13 @@
 package com.google.prettify;
 
 import com.visural.wicket.component.codebox.CodeBoxLanguage;
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
  * @version $Id: PrettifyJSResourceReference.java 17 2009-11-15 04:56:30Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class ExtraJSResourceReference extends ResourceReference {
+public class ExtraJSResourceReference extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public ExtraJSResourceReference(CodeBoxLanguage lang) {
         super(ExtraJSResourceReference.class, lang.getExtraJSfile());

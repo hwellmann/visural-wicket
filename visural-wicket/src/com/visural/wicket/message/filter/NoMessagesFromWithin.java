@@ -29,7 +29,7 @@ import org.apache.wicket.feedback.IFeedbackMessageFilter;
  * Typically the current form would be provided as the container, so that
  * field level messages are removed from the top-level feedback panel.
  *
- * @version $Id: NoMessagesFromWithin.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: NoMessagesFromWithin.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class NoMessagesFromWithin implements IFeedbackMessageFilter {

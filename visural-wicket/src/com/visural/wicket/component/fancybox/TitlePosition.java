@@ -19,7 +19,7 @@ package com.visural.wicket.component.fancybox;
 /**
  * Possible positions for the title of the fancybox title overlay.
  * 
- * @version $Id: TitlePosition.java 119 2010-02-23 12:03:28Z tibes80@gmail.com $
+ * @version $Id: TitlePosition.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public enum TitlePosition {

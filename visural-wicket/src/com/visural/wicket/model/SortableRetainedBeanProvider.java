@@ -26,7 +26,7 @@ import org.apache.wicket.model.IModel;
  * An implementation of `SortableDataProvider` which utilites the {@link RetainedBeanModel}
  * to provide a list of java beans, which is sortable by property.
  *
- * @version $Id: SortableRetainedBeanProvider.java 110 2010-02-23 02:26:36Z tibes80@gmail.com $
+ * @version $Id: SortableRetainedBeanProvider.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class SortableRetainedBeanProvider<T> extends SortableDataProvider<T> {

@@ -16,13 +16,13 @@
  */
 package com.visural.wicket.component.submitters.impl;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
- * @version $Id: ModalCSSRef.java 139 2010-03-26 06:26:57Z tibes80@gmail.com $
+ * @version $Id: ModalCSSRef.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class ModalCSSRef extends ResourceReference {
+public class ModalCSSRef extends PackageResourceReference {
 
     public ModalCSSRef() {
         super(ModalCSSRef.class, "visural.modal.css");

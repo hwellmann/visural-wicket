@@ -69,7 +69,7 @@ public class InputHintExamplePage extends BasePage {
             add(new TextField("age").add(new InputHintBehavior(this, "Years ( > 0 )", "color: #aaa;")));
             add(new TextField("dateOfBirth") {
                 @Override
-                public IConverter getConverter(Class<?> type) {
+                public <C> IConverter<C> getConverter(Class<C> type) {
                     if (Date.class.isAssignableFrom(type)) {
                         return new IConverter() {
                             public Object convertToObject(String value, Locale locale) {

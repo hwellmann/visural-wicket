@@ -29,7 +29,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.apache.wicket.Component;
-import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.html.IHeaderResponse;
 
 /**
@@ -42,7 +42,7 @@ import org.apache.wicket.markup.html.IHeaderResponse;
  * 
  * @author Richard Nichols
  */
-public class DateInputBehavior extends AbstractBehavior {
+public class DateInputBehavior extends Behavior {
     private static final long serialVersionUID = 1L;
     
     private Set<Component> bound = new HashSet<Component>();
@@ -52,7 +52,7 @@ public class DateInputBehavior extends AbstractBehavior {
     }
 
     /**
-     * Override and return false to suppress static Javascript and CSS contributions.
+     * Override and return false to suppress static JavaScript and CSS contributions.
      * (May be desired if you are concatenating / compressing resources as part of build process)
      * @return
      */
@@ -68,12 +68,12 @@ public class DateInputBehavior extends AbstractBehavior {
     }
 
     @Override
-    public void renderHead(IHeaderResponse response) {
+    public void renderHead(Component com, IHeaderResponse response) {
         if (autoAddToHeader()) {
             response.renderCSSReference(new DateInputCSSRef());
-            response.renderJavascriptReference(new DateInputJSRef());
+            response.renderJavaScriptReference(new DateInputJSRef());
         }
-        response.renderOnDomReadyJavascript(getJS());
+        response.renderOnDomReadyJavaScript(getJS());
     }
 
     private String getJS() {
@@ -256,7 +256,7 @@ If you have made a translation for a language not listed here, please see the se
 
 First day of the week
 
-The day names are listed from Sunday to Saturday, as this corresponds with Javascript’s representation of days of the week being between 0 for Sunday and 6 for Saturday. The default first day of the week is 1 for Monday. You can change this in the options like so:
+The day names are listed from Sunday to Saturday, as this corresponds with JavaScript’s representation of days of the week being between 0 for Sunday and 6 for Saturday. The default first day of the week is 1 for Monday. You can change this in the options like so:
 
 jQuery(el).date_input({ start_of_week: 0 });
 or:
@@ -264,7 +264,7 @@ or:
 $.extend(DateInput.DEFAULT_OPTS, { start_of_week: 0 });
 Date formatting
 
-Date formatting is done by two methods: stringToDate, which takes a string and returns a Javascript Date object, and dateToString which takes a Javascript Date object and returns a string. You can replace these two functions in the options to format the date differently. For example, the following formats dates as YYYY-MM-DD:
+Date formatting is done by two methods: stringToDate, which takes a string and returns a JavaScript Date object, and dateToString which takes a JavaScript Date object and returns a string. You can replace these two functions in the options to format the date differently. For example, the following formats dates as YYYY-MM-DD:
 
 $.extend(DateInput.DEFAULT_OPTS, {
   stringToDate: function(string) {

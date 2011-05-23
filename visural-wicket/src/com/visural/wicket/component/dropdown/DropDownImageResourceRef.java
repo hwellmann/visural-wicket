@@ -16,13 +16,13 @@
  */
 package com.visural.wicket.component.dropdown;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 /**
- * @version $Id: DropDownImageResourceRef.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: DropDownImageResourceRef.java 261 2011-03-08 20:53:16Z tibes80@gmail.com $
  * @author Richard Nichols
  */
-public class DropDownImageResourceRef extends ResourceReference {
+public class DropDownImageResourceRef extends PackageResourceReference {
     private static final long serialVersionUID = 1L;
     public DropDownImageResourceRef() {
         super(DropDownImageResourceRef.class, "arrow.gif");

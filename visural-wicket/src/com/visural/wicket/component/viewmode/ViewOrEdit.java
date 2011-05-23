@@ -60,7 +60,7 @@ import org.apache.wicket.model.Model;
  * `ViewOrEdit` element as per the property you wish to apply to the child
  * control.
  *
- * @version $Id: ViewOrEdit.java 217 2010-09-30 23:57:10Z tibes80@gmail.com $
+ * @version $Id: ViewOrEdit.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 public class ViewOrEdit extends FormComponentPanel implements ISecureRenderInstance, ISecureEnableInstance {

@@ -29,7 +29,7 @@ import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.Model;
 
 /**
- * @version $Id: DropDownExamplePage.java 225 2010-11-22 05:35:47Z tibes80@gmail.com $
+ * @version $Id: DropDownExamplePage.java 256 2011-02-05 12:06:02Z tibes80@gmail.com $
  * @author Richard Nichols
  */
 @At(url="/dropdown")
