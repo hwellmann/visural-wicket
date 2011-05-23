@@ -1,0 +1,38 @@
+<!--
+ Copyright 2010 Richard Nichols.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ under the License.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <wicket:extend>
+            <p class="highlight">
+                LessCSS extends CSS with variables, mixins, operations and nested rules.
+            </p>
+            <p>You can find out more about LessCSS at <a href="http://lesscss.org/">http://lesscss.org/</a></p>
+            <p>LessCSS removes repetition from your stylesheets, and allows you to do complex cross-browser styling in one-line of code, using operations and nested rules.</p>
+            <br/>
+            <p>You can include LessCSS support in your Wicket application using visural-wicket by adding this line to your Application.init()</p>
+            <pre>getResourceSettings().setResourceStreamLocator(new LessCSSResourceStreamLocator(getResourceFinder()));</pre>
+            <p>Then whenever you reference a file ending in ".less", it will automatically get parsed and translated by the LessCSS compiler.</p>
+            <pre>add(new StyleSheetReference("stylesheet", BasePage.class, "style.less"));</pre>
+            <p>This example application uses a "LessCSS" stylesheet, so download it and take a look to get started!</p>
+        </wicket:extend>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!--
+ Copyright 2010 Richard Nichols.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ under the License.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <wicket:extend>
+            <p class="highlight">
+                JSR303 defines a way of validating Java Beans using annotations. While it is possible to create all business validations
+                through use of JSR303's feature set, in practice the most useful annotations are the basic ones, for flagging
+                nullability, character size, numeric bounds, past/future dates or ranges and specific things like valid email addresses.
+            </p>
+            <p>JSR303ValidatedForm allows you to implement these types of validations using JSR303 annotations on your form's model beans.</p>
+            <p><b>Note</b> only the simple annotation types list above are picked up. visural-wicket takes a different tack to other integrations of JSR303, in that it applies standard Wicket validators based on the annotations on the model, rather than trying to apply JSR303 validation in place of Wicket's validation.</p>
+            <p>The reason for this is that I think Wicket's validation is pretty solid and practical, and it doesn't make sense to throw away one of Wicket's best features for a different implemenation.</p>
+            <p>This integration is more for Wicket developers who want a convenient and time-effecting syntax, rather than JSR303 users who want a simple Wicket experience.</p>
+            <br/>
+            <form wicket:id="jsrForm">
+                <fieldset>
+                    <legend>Auto-Validating Form (JSR303)</legend>
+                    <div wicket:id="feedback"></div>
+                    <div class="fieldset"><label>Name</label> <input wicket:id="name" type="text"/> (@NotNull @Size(min=20, max=100))</div>
+                    <div class="fieldset"><label>Age</label> <input wicket:id="age" type="text"/> (@Min(0) @Max(120))</div>
+                    <div class="fieldset"><label>Date of Birth</label> <input wicket:id="dateOfBirth" type="text"/> (@Past)</div>
+                    <div class="fieldset"><label>Email</label> <input wicket:id="email" type="text"/> (@Email)</div>
+                </fieldset>
+                <a class="button" wicket:id="submit">Submit/Validate</a>
+            </form>
+        </wicket:extend>
+    </body>
+</html>

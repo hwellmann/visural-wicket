@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+    <head>
+        <title wicket:id="pageTitle">Visural Wicket Examples</title>
+<!--        <link wicket:id='reset'/>-->
+        <link wicket:id='stylesheet'/>
+    </head>
+    <body>
+        <h1 wicket:id="pageTitleHeader">Visural Wicket Examples</h1>
+        <div style="clear: both;"> </div>
+        <div style="float: right; width: 35px;">&nbsp;</div>
+        <div class="viewsource"><a href="http://wicket.visural.net/javadoc/">Javadoc Index</a></div>
+        <div class="viewsource"><a href="#" wicket:id="viewSource">View Source</a></div>
+        <div class="viewsource"><a href="#" wicket:id="viewMarkup">View Markup</a></div>
+        <div style="padding: 50px 50px 25px 50px;">
+            <div class="content">
+                <table width="100%">
+                    <tr>
+                        <td width="200px" valign="top">
+                            <div id="menu" style="margin-right: 25px;">
+                                <a class="button" href="#" wicket:id="codebox">Code Box</a>
+                                <a class="button" href="#" wicket:id="confirmers">Confirmers</a>
+                                <a class="button" href="#" wicket:id="dateInput">Date Input</a>
+                                <a class="button" href="#" wicket:id="dropdown">Drop Down</a>
+                                <a class="button" href="#" wicket:id="fancybox">Fancybox</a>
+                                <a class="button" href="#" wicket:id="inputHintLink">Input Hint</a>
+                                <a class="button" href="#" wicket:id="jsr303">JSR303 Form</a>
+                                <a class="button" href="#" wicket:id="lesscss">LessCSS</a>
+                                <a class="button" href="#" wicket:id="dialogBut">Modal Dialog</a>
+                                <a class="button" href="#" wicket:id="nicedit">Rich Text Editor</a>
+                                <a class="button" href="#" wicket:id="submitters">Submitters</a>
+                                <a class="button" href="#" wicket:id="tabsLink">Client-side Tabs [new!]</a>
+                                <a class="button" href="#" wicket:id="tooltips">Tool Tips</a>
+                                <a class="button" href="#" wicket:id="vieworedit">ViewOrEdit</a>
+
+                            </div>
+                        </td>
+                        <td valign="top">
+                            <h2 wicket:id="title">Title</h2>
+                            <wicket:child></wicket:child>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <p style="text-align: center; color: black;"><span style="padding: 5px;" class="highlight">Remember that you can see how any of these pages work by using the <span style="background-color: #ea6c20;">orange</span> buttons!</span></p>
+        <div style="padding: 0px 50px 0px 50px;">
+            <div class="content" style="text-align: center;">
+                <a class="button" href="http://code.google.com/p/visural-wicket/">visural-wicket</a> is <a rel="nofollow" class="button" href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 Licenced</a> open source, created by <a title="Java developer and blogger." class="button" href="http://www.richardnichols.net/">Richard Nichols</a>
+            </div>
+        </div>
+        <div wicket:id="analytics">
+            <script type="text/javascript">
+            var clicky = { log: function(){ return; }, goal: function(){ return; }};
+            var clicky_site_id = 66357768;
+            (function() {
+              var s = document.createElement('script');
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = ( document.location.protocol == 'https:' ? 'https://static.getclicky.com/js' : 'http://static.getclicky.com/js' );
+              ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+            })();
+            </script>
+            <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/66357768ns.gif" /></p></noscript>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!--
+ Copyright 2010 Richard Nichols.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ under the License.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <wicket:extend>
+            <p class="highlight">
+                ViewOrEdit is a component which is invisible to the user, but makes development much easier. It allows form pages to automatically support multiple business rules where some components on the page are disabled under certain circumstances.
+            </p>
+            <p>The ViewOrEdit component "wraps" your regular form components, and based on the rule(s) that you determine chooses whether to present the editable component or a text-based read-only alternative.</p>
+            <p>A stand-out feature of this component is that it creates a dynamic wrapping model, to allow you to still use CompoundPropertyModels applied to your Form or container, against your form components.</p>
+            <p>Simply, wrap your control in the ViewOrEdit() component, give it the ID "ViewOrEdit.COMP_ID" and give your ViewOrEdit container, the ID that you would have given the form component.</p>
+            <p><a class="button" href="#" wicket:id="toggle">Toggle Form Enabled Property</a> <a class="button" href="#" wicket:id="toggleAddr">Toggle Addresss Enabled Property</a></p>
+            <form wicket:id="viewOrEditForm">
+                <p><a class="button" href="#" wicket:id="toggle">Toggle Form Enabled Property</a> <a class="button" href="#" wicket:id="toggleAddr">Toggle Addresss Enabled Property</a></p>
+                <fieldset style="width: 800px;">
+                    <legend>View Or Edit Container Examples</legend>
+                    <div class="fieldset"><span wicket:id="feedback" class="highlight"></span></div>
+                    <div class="fieldset"><label>Name:</label> <span wicket:id="name"></span></div>
+                    <div class="fieldset"><label>Country:</label> <span wicket:id="country"></span></div>
+                    <div class="fieldset"><label>Address:</label> <span wicket:id="address"></span> </div>
+                </fieldset>
+                <br/><br/>
+                <a href="#" class="button" wicket:id="submit">Submit</a>
+            </form>
+        </wicket:extend>
+    </body>
+</html>

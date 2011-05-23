@@ -1,0 +1,40 @@
+<!--
+ Copyright 2010 Richard Nichols.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ under the License.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <wicket:extend>
+            <p>Confirmers display a yes/no prompt using javascript prior to proceeding with the regular action.</p>
+            <p class="highlight">Note that confirmers are currently a beta feature and the API is likely to change.</p>
+            <form wicket:id="calcForm">
+                <fieldset style="width: 500px;">
+                    <legend>Calculation Form</legend>
+                    <span wicket:id="feedback"></span>
+                    <div class="fieldset"><label>Enter X:</label> <input type="text" wicket:id="numx"/></div>
+                    <div class="fieldset"><label>Enter Y:</label> <input type="text" wicket:id="numy"/></div>
+                    <div class="fieldset"><label>Answer:</label> <span wicket:id="answer"></span></div>
+                </fieldset>
+                <br/><br/>
+                <a href="#" class="button" wicket:id="refreshingAjax">Calculate X*Y</a> <a href="#" class="button" wicket:id="random">Randomize</a>
+            </form>
+        </wicket:extend>
+    </body>
+</html>

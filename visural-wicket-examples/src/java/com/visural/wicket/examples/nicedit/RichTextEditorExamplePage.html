@@ -1,0 +1,44 @@
+<!--
+ Copyright 2010 Richard Nichols.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ under the License.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <wicket:extend>
+            <p class="highlight">The Rich Text Editor component allows users to apply styling to their text in a WYSIWYG fashion.</p>
+            <form wicket:id="rteForm">
+                <fieldset>
+                    <legend>Rich Text Editor (Nicedit) Example</legend>
+                    <textarea style="width: 700px; height: 340px;" wicket:id="rte"></textarea>
+                    <br/><br/>
+                    Text value = <span wicket:id="rteModel"></span>
+                </fieldset>
+                <br/><br/>
+                <a href="#" class="button" wicket:id="submit">Submit</a>
+                <br/><br/>
+                <p>Often with web application we want to restrict the sort of HTML that users can create in this type of control. Here is an example of a restricted functionality editor:</p>
+                <fieldset>
+                    <legend>Reduced Functionality Example</legend>
+                    <textarea style="width: 700px; height: 340px;" wicket:id="rtered"></textarea>
+                </fieldset>
+            </form>
+        </wicket:extend>
+    </body>
+</html>

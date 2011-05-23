@@ -1,0 +1,41 @@
+<!--
+ Copyright 2010 Richard Nichols.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ under the License.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <wicket:extend>
+            <p class="highlight">
+                Dialog is a modal pop-up dialog which can be used as a container for any other wicket components.
+            </p>
+            <p>It can be opened and closed by either a server side AjaxRequestTarget, or on the client side by using an "onclick" javascript event.</p>
+            <p>You can override the open and close javascript code to embed other javascript call backs if you desire.</p>
+            <p>You can also switch on a feature which allows the dialog to close when you click on the background.</p>
+            <br/><br/><br/>
+            <a href="#" class="button" wicket:id="open">Open Dialog (Javascript)</a> <a href="#" class="button" wicket:id="openAjax">Open Dialog (Ajax)</a>
+            <div wicket:id="dialog">
+                <div style="background-color: white; border: 1px solid black; display: block; text-align: center; padding: 30px;">
+                    <p>This is the dialog box. Add your content as you would with any other WebMarkupContainer.</p>
+                    <a href="#" wicket:id="close">Close Dialog</a>
+                </div>
+            </div>
+        </wicket:extend>
+    </body>
+</html>

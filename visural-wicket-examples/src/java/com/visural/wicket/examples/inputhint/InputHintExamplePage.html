@@ -1,0 +1,46 @@
+<!--
+ Copyright 2010 Richard Nichols.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ under the License.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <wicket:extend>
+            <p class="highlight">
+                InputHint is a behaviour which will allow you to insert a prompt into a blank text field in order to hint to the user
+                as to it's purpose. When the user clicks in the field, the hint text will disappear making way for them to enter their
+                own value.
+            </p>
+            <p>When you create the input hint, you need to provide the form that the control is a part of, and a style for the hint (i.e. the content of the style='...' attribute).</p>
+            <p>You can optionally provide a "normal style" as well, if you are using element level style attributes in your markup.</p>
+            <br/>
+            <form wicket:id="jsrForm">
+                <fieldset>
+                    <legend>Input Hint Form</legend>
+                    <div wicket:id="feedback"></div>
+                    <div class="fieldset"><label>Name</label> <input wicket:id="name" type="text"/> </div>
+                    <div class="fieldset"><label>Age</label> <input wicket:id="age" type="text"/> </div>
+                    <div class="fieldset"><label>Date of Birth</label> <input wicket:id="dateOfBirth" type="text"/> </div>
+                    <div class="fieldset"><label>Email</label> <input wicket:id="email" type="text"/> </div>
+                </fieldset>
+                <a class="button" wicket:id="submit">Submit/Validate</a>
+            </form>
+        </wicket:extend>
+    </body>
+</html>
