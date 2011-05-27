@@ -107,9 +107,9 @@ function VisuralDropDown(p_controlId, p_dataSourceName, p_allowAnyValue, p_enabl
     this.keyedText = '';
     this.currentValues = [];
     this.keyScrollIdx = -1;
-    this.dropDownDiv = jQuery('#visural_dropdown_'+this.controlId);
-    this.idControl = jQuery('#visural_dropdown_id_'+this.controlId);
-    this.valueControl = jQuery('#visural_dropdown_value_'+this.controlId);
+    this.dropDownDiv = jQuery(document.getElementById('visural_dropdown_'+this.controlId));
+    this.idControl = jQuery(document.getElementById('visural_dropdown_id_'+this.controlId));
+    this.valueControl = jQuery(document.getElementById('visural_dropdown_value_'+this.controlId));
     this.closeOnBlur = true;
     this.lastInputTime = 0;
     this.enableFiltering = p_enableFiltering;
@@ -176,7 +176,7 @@ function VisuralDropDown(p_controlId, p_dataSourceName, p_allowAnyValue, p_enabl
 
     this.scrollAdjust = function() {
         var divHeight = this.dropDownDiv.height();
-        var selRow = jQuery('#'+this.controlId+this.currentValues[this.keyScrollIdx].id);
+        var selRow = jQuery(document.getElementById(this.controlId+this.currentValues[this.keyScrollIdx].id));
         var rowHeight = selRow.outerHeight(true);
         if (selRow.position().top >= (divHeight-rowHeight)) {
             // push div so that selRow appears at bottom
@@ -261,7 +261,7 @@ function VisuralDropDown(p_controlId, p_dataSourceName, p_allowAnyValue, p_enabl
             // up
             // unhilite if necessary
             if (this.keyScrollIdx != -1) {
-                jQuery('#'+this.controlId+this.currentValues[this.keyScrollIdx].id).removeClass('selected');
+                jQuery(document.getElementById(this.controlId+this.currentValues[this.keyScrollIdx].id)).removeClass('selected');
             }
             this.keyScrollIdx -= 1;
             if (this.keyScrollIdx < 0) {
@@ -269,13 +269,13 @@ function VisuralDropDown(p_controlId, p_dataSourceName, p_allowAnyValue, p_enabl
             }
             this.idControl.val(this.currentValues[this.keyScrollIdx].id);
             this.valueControl.val(this.currentValues[this.keyScrollIdx].value);
-            jQuery('#'+this.controlId+this.currentValues[this.keyScrollIdx].id).addClass('selected');
+            jQuery(document.getElementById(this.controlId+this.currentValues[this.keyScrollIdx].id)).addClass('selected');
             this.scrollAdjust();
         } else if (mykey == 40) {
             // down
             // unhilite if necessary
             if (this.keyScrollIdx != -1) {
-                jQuery('#'+this.controlId+this.currentValues[this.keyScrollIdx].id).removeClass('selected');
+                jQuery(document.getElementById(this.controlId+this.currentValues[this.keyScrollIdx].id)).removeClass('selected');
             }
             this.keyScrollIdx += 1;
             if (this.keyScrollIdx > this.currentValues.length - 1) {
@@ -283,7 +283,7 @@ function VisuralDropDown(p_controlId, p_dataSourceName, p_allowAnyValue, p_enabl
             }
             this.idControl.val(this.currentValues[this.keyScrollIdx].id);
             this.valueControl.val(this.currentValues[this.keyScrollIdx].value);
-            jQuery('#'+this.controlId+this.currentValues[this.keyScrollIdx].id).addClass('selected');
+            jQuery(document.getElementById(this.controlId+this.currentValues[this.keyScrollIdx].id)).addClass('selected');
             this.scrollAdjust();
         } else if (mykey == 13) {
             // enter

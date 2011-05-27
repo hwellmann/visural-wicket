@@ -46,6 +46,7 @@ public class ExamplesApplication extends WebApplication {
         }
         getResourceSettings().setResourcePollFrequency(null);
         getResourceSettings().setResourceStreamLocator(new LessCSSResourceStreamLocator(getResourceFinder()));
+        getResourceSettings().setJavascriptCompressor(null);
     }
 
     @Override
