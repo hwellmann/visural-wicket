@@ -202,7 +202,7 @@ public class BeautyTipBehavior extends AbstractBehavior {
     private String getJS() {
         StringBuilder sb = new StringBuilder();
         for (String id : componentIds) {
-            sb.append("jQuery('#").append(id).append("').bt(").append(getOptionsJSON()).append(");");
+            sb.append("jQuery(document.getElementById('").append(id).append("')).bt(").append(getOptionsJSON()).append(");");
         }
         return sb.toString();
     }
